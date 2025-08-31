@@ -1,1 +1,14 @@
 @import "tailwindcss";
+:root{
+  /* palette tuned to your screenshot */
+  --bg-pane: #e9f0ff;           /* pale blue page bg */
+  --panel:   #ffffff;           /* white cards */
+  --ink:     #0b2447;           /* deep navy text */
+  --ink-2:   #1b3766;           /* headings */
+  --muted:   #6b7a99;           /* subtle text */
+  --brand:   #173b6b;           /* sidebar text */
+  --accent:  #0f2c5c;           /* active pill */
+  --soft:    #dce6ff;           /* soft borders */
+  --shadow:  0 8px 20px rgba(20,40,90,.08);
+}
+body{ background: var(--bg-pane); color: var(--ink); }

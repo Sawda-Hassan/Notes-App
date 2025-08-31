@@ -4,7 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import noteRoutes from "./routes/noteRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
-
+import { protect } from "./middleware/auth.js";
+import authRoutes from './routes/authRoutes.js'
 dotenv.config();
 
 const app = express();
@@ -13,7 +14,9 @@ app.use(express.json());
 
 // routes
 app.get("/", (_, res) => res.send("Notes API ✅"));
-app.use("/api/notes", noteRoutes);
+//app.use("/api/notes", noteRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/notes", protect, noteRoutes); // protect all note endpoints
 
 // error handlers
 app.use(notFound);
