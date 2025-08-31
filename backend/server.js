@@ -11,6 +11,27 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+// --- CORS (single source of truth) ---
+const ALLOWED = new Set([
+  'https://place-sharing-128o.vercel.app', // prod frontend
+  'http://localhost:3000',                 // dev
+]);
+
+app.use(cors({
+  origin: (origin, cb) => {
+    // allow no-origin (Postman/cURL) and whitelisted origins
+    if (!origin || ALLOWED.has(origin) || /\.vercel\.app$/.test(origin)) {
+      return cb(null, true);
+    }
+    return cb(new Error(`CORS: ${origin} not allowed`));
+  },
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
+}));
+
+// Fast exit for preflight
+app.options('*', cors());
+
 
 // routes
 app.get("/", (_, res) => res.send("Notes API ✅"));
