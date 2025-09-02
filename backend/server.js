@@ -10,12 +10,23 @@ import authRoutes from "./routes/authRoutes.js";
 dotenv.config();
 const app = express();
 
-/* ---- CORS CONFIG ---- */
+const allowed = [
+  "https://notes-app-iota-ochre.vercel.app", // your Vercel URL
+  "http://localhost:5173",                    // Vite dev
+];
+
 app.use(cors({
-  origin: [process.env.FRONTEND_URL, "http://localhost:5173", "http://localhost:3000"],
-  credentials: true
+  origin: (origin, cb) => {
+    // allow non-browser tools (curl/Postman) with no origin
+    if (!origin) return cb(null, true);
+    return allowed.includes(origin) ? cb(null, true) : cb(new Error("Not allowed by CORS"));
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: false // you're using Bearer tokens, not cookies
 }));
 
+// (optional, helps some hosts)
 
 app.options("*", cors()); // preflight
 
