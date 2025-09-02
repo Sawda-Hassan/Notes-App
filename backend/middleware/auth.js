@@ -7,8 +7,8 @@ export const protect = async (req, res, next) => {
   if (!token) return res.status(401).json({ message: "Not authorized" });
 
   try {
-    const { id } = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(id).select("_id email");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id).select("_id email");
     if (!user) return res.status(401).json({ message: "User not found" });
     req.user = { id: user._id, email: user.email };
     next();
