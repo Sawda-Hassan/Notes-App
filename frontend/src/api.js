@@ -1,6 +1,13 @@
 import axios from "axios";
 
-// Use Vite env if set, else localhost
-const BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000/api";
+const isProd = import.meta.env.MODE === "production";
+const BASE =
+  import.meta.env.VITE_API_BASE ??
+  (isProd
+    ? "https://notes-app-1-a5nb.onrender.com/api"  // ✅ Render backend
+    : "http://localhost:5000/api");                // ✅ local dev
 
-export const api = axios.create({ baseURL: BASE });
+export const api = axios.create({
+  baseURL: BASE,
+  timeout: 20000,
+});
