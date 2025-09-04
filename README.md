@@ -11,7 +11,7 @@ Users can register/login, create notes with tags, pin important notes, and manag
   👉 [https://notes-app-1-a5nb.onrender.com](https://notes-app-1-a5nb.onrender.com)
 
 - **Frontend (React + Vite + Vercel):**  
-  👉 [https://notes-app-iota-ochre.vercel.app](https://notes-app-iota-ochre.vercel.app)
+  👉 [https://notes-app-iota-ochre.vercel.app](https://notes-app-onpf.vercel.app/)
 
 ---
 
