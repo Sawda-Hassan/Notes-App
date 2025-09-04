@@ -25,7 +25,7 @@ export default function AuthForm({ onAuthed }) {
 
   const switchMode = (newMode) => {
     setMode(newMode);
-    setErr(""); // clear previous errors
+    setErr("");
     setName("");
     setEmail("");
     setPassword("");

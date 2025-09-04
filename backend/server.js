@@ -60,6 +60,7 @@ app.get("/api/health", (_, res) =>
 app.use("/api/auth", authRoutes);
 app.use("/api/notes", protect, noteRoutes);
 
+
 /* ---------- Errors ---------- */
 app.use(notFound);
 app.use(errorHandler);
