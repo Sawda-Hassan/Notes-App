@@ -35,10 +35,12 @@ const corsOptionsDelegate = (req, cb) => {
 
   cb(null, {
     origin: allow,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    // credentials not needed for Bearer tokens (leave false)
-    credentials: false,
+    methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    // If you omit allowedHeaders, the cors lib reflects
+    // Access-Control-Request-Headers automatically (best for preflight)
+    credentials: false,            // Bearer tokens, not cookies
+    optionsSuccessStatus: 204,     // play nice with legacy browsers
+    maxAge: 86400,                 // cache preflights for 24h
   });
 };
 
